@@ -1,7 +1,6 @@
 package com.lms.lmsBackend.config;
 
 import com.lms.lmsBackend.model.Admin;
-import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,9 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AdminPrincipal implements UserDetails {
-    @Autowired
     private Admin admin;
-
     public AdminPrincipal(Admin admin) {
         this.admin = admin;
     }
@@ -26,7 +23,7 @@ public class AdminPrincipal implements UserDetails {
     }
 
     @Override
-    public @Nullable String getPassword() {
+    public  String getPassword() {
         return admin.getPassword();
     }
 

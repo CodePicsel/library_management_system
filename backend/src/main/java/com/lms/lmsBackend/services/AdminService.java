@@ -2,7 +2,6 @@ package com.lms.lmsBackend.services;
 
 import com.lms.lmsBackend.model.Admin;
 import com.lms.lmsBackend.repo.AdminRepo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
