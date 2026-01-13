@@ -1,0 +1,45 @@
+# ===============================
+# Node / Package managers
+# ===============================
+# ignore node_modules in any subfolder
+**/node_modules/
+node_modules/
+
+# npm / yarn / pnpm logs & lockfiles you may not want
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===============================
+# Expo / React Native & build artifacts
+# ===============================
+.expo/
+.expo-shared/
+web-build/
+dist/
+build/
+android/.gradle/
+android/app/build/
+ios/build/
+
+# ===============================
+# Env & local config
+# ===============================
+.env
+.env.*.local
+app.config.local.js
+
+# ===============================
+# Editor / OS
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ===============================
+# Misc
+# ===============================
+coverage/
+*.log
