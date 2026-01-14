@@ -1,15 +1,12 @@
 package com.lms.lmsBackend.config;
 
 import com.lms.lmsBackend.model.Admin;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class AdminPrincipal implements UserDetails {
     private Admin admin;
