@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
       clearAuth();
       return {
         ok: false,
-        error: 'Invalid username or password'
+        error: 'Invalid username ddr password'
       };
     }
   };
