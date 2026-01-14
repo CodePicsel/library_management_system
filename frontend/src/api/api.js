@@ -1,20 +1,21 @@
 // /api/api.js
 import axios from 'axios';
+import { Buffer } from 'buffer';
 
-// Default baseURL for Android emulator. Change for iOS or device.
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
-  timeout: 10000,
+  baseURL: 'http://10.0.2.2:8081',
+  timeout: 60,
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Helper to set auth header after login
-export function setAuthToken(token) {
-  if (token) {
-    api.defaults.headers.common.Authorization = `Bearer ${token}`;
-  } else {
-    delete api.defaults.headers.common.Authorization;
-  }
+// BASIC AUTH helper
+export function setBasicAuth(username, password) {
+  const token = Buffer.from(`${username}:${password}`).toString('base64');
+  api.defaults.headers.common.Authorization = `Basic ${token}`;
+}
+
+export function clearAuth() {
+  delete api.defaults.headers.common.Authorization;
 }
 
 export default api;
