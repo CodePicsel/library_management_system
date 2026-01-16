@@ -16,14 +16,13 @@ export default function LoginScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState('admin'); // 'admin' or 'student'
   const [loading, setLoading] = useState(false);
 
-  // Admin sign-in (existing behaviour)
+  // Admin sign-in
   const handleAdminSignIn = async (credentials) => {
     setLoading(true);
-    const res = await loginAdmin(credentials); // expects { email, password }
+    const res = await loginAdmin(credentials);
     setLoading(false);
 
     if (res.ok) {
-      // only admin uses basic auth header approach
       setBasicAuth(credentials.email, credentials.password);
       await AsyncStorage.setItem(
         'basicAuthUser',
@@ -33,9 +32,8 @@ export default function LoginScreen({ navigation }) {
           password: credentials.password
         })
       );
-      // store role so other screens can adapt
       await AsyncStorage.setItem('userRole', 'admin');
-      navigation.replace('Main'); // or admin-specific route
+      navigation.replace('Main');
       return { ok: true };
     }
 
@@ -44,13 +42,11 @@ export default function LoginScreen({ navigation }) {
 
   // Student sign-in
   const handleStudentSignIn = async (credentials) => {
-    // credentials may have: { email, password } (and optionally username if AuthForm collects it)
     setLoading(true);
     const res = await loginStudent(credentials);
     setLoading(false);
 
     if (res.ok) {
-      // save minimal student info locally
       await AsyncStorage.setItem(
         'studentUser',
         JSON.stringify({
@@ -60,23 +56,25 @@ export default function LoginScreen({ navigation }) {
         })
       );
       await AsyncStorage.setItem('userRole', 'student');
-      navigation.replace('Main'); // or admin-specific route
+      navigation.replace('Main');
       return { ok: true };
     }
 
     return { ok: false, error: res.error };
   };
 
-  // choose which submit handler to pass to AuthForm
   const onSubmit = activeTab === 'admin' ? handleAdminSignIn : handleStudentSignIn;
-  const submitLabel = activeTab === 'admin' ? 'Sign in as Admin' : 'Sign in as Student';
+  const submitLabel = 'Sign In';
 
   return (
     <View style={styles.root}>
       <ImageLooper source={STOCK} loopDuration={22000} />
 
       <View style={styles.content}>
-        {/* Tabs */}
+        {/* Title */}
+        <Text style={styles.title}>Welcome{"\n"}Back</Text>
+
+        {/* Tabs (styled to feel like an input field container) */}
         <View style={styles.tabContainer}>
           <TouchableOpacity
             style={[styles.tab, activeTab === 'admin' ? styles.tabActive : styles.tabInactive]}
@@ -97,10 +95,7 @@ export default function LoginScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* title */}
-        <Text style={styles.title}>Welcome{"\n"}Back</Text>
-
-        {/* Auth form: pass submit handler and label */}
+        {/* Auth form */}
         <AuthForm submitLabel={submitLabel} onSubmit={onSubmit} initial={{}} loading={loading} />
 
         <View style={styles.row}>
@@ -126,17 +121,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end'
   },
+
+  // Matches AuthForm.form + AuthForm.input geometry
   tabContainer: {
     flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'flex-end',
-    marginBottom: 10
+
+    // same as AuthForm.form
+    width: 200,
+    maxWidth: '85%',
+    alignSelf: 'flex-end',
+    marginRight: 20,
+
+    // same as AuthForm.input
+    height: 44,
+    marginBottom: 12,
+    backgroundColor: '#f1f5f9',
+    borderRadius: 12,
+
+    paddingHorizontal: 6,
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
+
   tab: {
     paddingVertical: 8,
     paddingHorizontal: 14,
     borderRadius: 8,
-    marginLeft: 8
+    // marginLeft: 8,
+    alignSelf: 'center'
   },
   tabActive: {
     backgroundColor: '#4ade80'
@@ -148,16 +160,17 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   tabTextActive: {
-    color: '#072014'
+    color: '#fff'
   },
   tabTextInactive: {
-    color: '#6b7280'
+    color: '#b2b5bc'
   },
+
   title: {
     fontSize: 40,
     fontWeight: '600',
-    marginBottom: 20,
-    // remove the huge top margin to keep title close to form
+    marginBottom: 25,
+    marginTop: 250,
     color: '#0b1220',
     textAlign: 'right',
     fontFamily: Platform.OS === 'android' ? 'serif' : undefined

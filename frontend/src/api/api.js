@@ -8,10 +8,13 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// BASIC AUTH helper
 export function setBasicAuth(username, password) {
-  const token = Buffer.from(`${username}:${password}`).toString('base64');
-  api.defaults.headers.common.Authorization = `Basic ${token}`;
+  if(username && password){
+    const token = Buffer.from(`${username}:${password}`).toString('base64');
+    api.defaults.headers.common.Authorization = `Basic ${token}`;
+  }else{
+    delete api.defaults.headers.common.Authorization;
+  }
 }
 
 export function clearAuth() {
