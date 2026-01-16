@@ -20,7 +20,7 @@ public class StudentController {
         return studentService.register(studentDto);
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Student student){
         String success = studentService.login(student);
         if ("Login Successful".equals(success)) {

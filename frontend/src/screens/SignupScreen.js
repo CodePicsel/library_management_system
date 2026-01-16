@@ -14,7 +14,7 @@ export default function SignupScreen({ navigation }) {
       <View style={styles.content}>
         <Text style={styles.title}>Create{"\n"}account</Text>
 
-        <AuthForm submitLabel="Sign up" /* onSubmit={handleSignUp} */ initial={{ name: '', email: '', password: '' }} />
+        <AuthForm submitLabel="Sign up" /*onSubmit={handleSignUp}*/ initial={{ name: '', email: '', password: '' }} />
 
         <View style={styles.row}>
           <Text style={styles.note}>Already have an account?</Text>
