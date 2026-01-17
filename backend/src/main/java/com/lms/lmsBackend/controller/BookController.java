@@ -20,7 +20,7 @@ public class BookController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> addProduct(@RequestBody Books books) {
+    public ResponseEntity<?> addBook(@RequestBody Books books) {
         try {
             Books books1 = booksService.addBook(books);
             return new ResponseEntity<>(books1, HttpStatus.CREATED);

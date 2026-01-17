@@ -19,16 +19,16 @@ public class AdminService{
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 
-    public Admin register(AdminDto adminDto){
-        Admin admin = new Admin();
-        admin.setUsername(adminDto.getUsername());
-
-        // Encode the raw password from the DTO
-        admin.setPassword(bCryptPasswordEncoder.encode(adminDto.getPassword()));
-
-        admin.setRole("ROLE_ADMIN");
-        return adminRepo.save(admin);
-    }
+//    public Admin register(AdminDto adminDto){
+//        Admin admin = new Admin();
+//        admin.setUsername(adminDto.getUsername());
+//
+//        // Encode the raw password from the DTO
+//        admin.setPassword(bCryptPasswordEncoder.encode(adminDto.getPassword()));
+//
+//        admin.setRole("ROLE_ADMIN");
+//        return adminRepo.save(admin);
+//    }
 
     @Autowired
     private AuthenticationManager authenticationManager;
