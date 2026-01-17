@@ -6,7 +6,10 @@ import com.lms.lmsBackend.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/admin")
@@ -29,5 +32,16 @@ public class AdminController {
         }else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(success);
         }
+    }
+    @PutMapping("/update-account")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> updateAccount(Principal principal, @RequestParam String newUsername, @RequestParam String newPassword) {
+        // principal.getName() is the current username (e.g., "SuperAdmin")
+        String result = adminService.updateCredentials(principal.getName(), newUsername, newPassword);
+
+        if (result.contains("successfully")) {
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
 }

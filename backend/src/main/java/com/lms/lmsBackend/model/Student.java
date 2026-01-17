@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long student_id;
 
     public float getFine() {
         return fine;
@@ -26,11 +26,11 @@ public class Student {
     private float fine = 0.0f;
 
     public Long getId() {
-        return id;
+        return student_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.student_id = id;
     }
 
     public String getEmail() {

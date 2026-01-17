@@ -3,6 +3,7 @@ package com.lms.lmsBackend.services;
 import com.lms.lmsBackend.dto.AdminDto;
 import com.lms.lmsBackend.model.Admin;
 import com.lms.lmsBackend.repo.AdminRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -49,5 +50,16 @@ public class AdminService{
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
+    }
+    @Transactional
+    public String updateCredentials(String currentUsername, String newUsername, String newPassword) {
+        Admin admin = adminRepo.findByUsername(currentUsername);
+        if (admin == null) return "Admin not found";
+
+        admin.setUsername(newUsername);
+        admin.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        adminRepo.save(admin);
+
+        return "Credentials updated successfully";
     }
 }
