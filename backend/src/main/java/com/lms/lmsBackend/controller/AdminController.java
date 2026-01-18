@@ -18,10 +18,10 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping("/register")
-    public Admin register(@RequestBody AdminDto adminDto) {
-        return adminService.register(adminDto);
-    }
+//    @PostMapping("/register")
+//    public Admin register(@RequestBody AdminDto adminDto) {
+//        return adminService.register(adminDto);
+//    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Admin admin){
