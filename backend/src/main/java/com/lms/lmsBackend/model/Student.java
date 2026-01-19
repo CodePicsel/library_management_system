@@ -23,15 +23,24 @@ public class Student {
     @Column(nullable = false)
     private String password;
     private String role = "ROLE_STUDENT";
-    private float fine = 0.0f;
 
-    public Long getId() {
+    public Long getStudent_id() {
         return student_id;
     }
 
-    public void setId(Long id) {
-        this.student_id = id;
+    public void setStudent_id(Long student_id) {
+        this.student_id = student_id;
     }
+
+    private float fine = 0.0f;
+
+//    public Long getId() {
+//        return student_id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.student_id = id;
+//    }
 
     public String getEmail() {
         return email;

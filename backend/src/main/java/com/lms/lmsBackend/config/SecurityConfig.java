@@ -32,9 +32,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request-> request
                                 .requestMatchers("/admin/register","/admin/update-account").hasRole("ADMIN")
                                 .requestMatchers("/admin/login").permitAll()
+
                                 .requestMatchers("/books/add","/books/set-fine/{student_id}").hasRole("ADMIN")
                                 .requestMatchers("/books/books-all").permitAll()
                                 .requestMatchers("/students/register","/students/login").permitAll()
+                                .requestMatchers("/admin/students-list/{student_id}").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                         )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

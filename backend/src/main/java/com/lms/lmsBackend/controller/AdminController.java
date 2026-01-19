@@ -1,7 +1,7 @@
 package com.lms.lmsBackend.controller;
 
-import com.lms.lmsBackend.dto.AdminDto;
 import com.lms.lmsBackend.model.Admin;
+import com.lms.lmsBackend.model.Student;
 import com.lms.lmsBackend.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -44,4 +45,21 @@ public class AdminController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
+    @GetMapping("/students-list/{student_id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Student> getStudent(@PathVariable Long student_id){
+        Student student = adminService.getStudentById(student_id);
+        if (student != null) {
+            return new ResponseEntity<>(student,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/all-students")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Student>> getAllStudents(){
+        return ResponseEntity.ok(adminService.getAllStudents());
+    }
+
 }

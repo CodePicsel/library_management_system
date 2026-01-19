@@ -2,8 +2,11 @@ package com.lms.lmsBackend.services;
 
 import com.lms.lmsBackend.dto.AdminDto;
 import com.lms.lmsBackend.model.Admin;
+import com.lms.lmsBackend.model.Student;
 import com.lms.lmsBackend.repo.AdminRepo;
+import com.lms.lmsBackend.repo.StudentRepo;
 import jakarta.transaction.Transactional;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,10 +15,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminService{
     @Autowired
     private AdminRepo adminRepo;
+
+    @Autowired
+    private StudentRepo studentRepo;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 
@@ -61,5 +69,14 @@ public class AdminService{
         adminRepo.save(admin);
 
         return "Credentials updated successfully";
+    }
+
+    public Student getStudentById(Long student_id) {
+        return studentRepo.findById(student_id).orElse(null);
+    }
+
+
+    public List<Student> getAllStudents() {
+        return studentRepo.findAll();
     }
 }
