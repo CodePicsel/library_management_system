@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Buffer } from 'buffer';
 
 const api = axios.create({
-  baseURL: 'http://10.0.2.2:8081',
-  timeout: 60,
+  baseURL: 'http://10.0.2.2:8080',
+  timeout: 60000,
   headers: { 'Content-Type': 'application/json' },
 });
 
