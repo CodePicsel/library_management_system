@@ -1,5 +1,5 @@
 // DashboardScreen.js
-import React, { useMemo } from 'react';
+import React, { useMemo, useLayoutEffect } from 'react';
 import {
   View,
   Text,
@@ -14,8 +14,17 @@ import {
 
 // Import your illustration image (keep your existing path)
 import illustration from '../../assets/reading_img_removed_bg.png';
+import FloatingAddButton from '../components/FloatingAddButton';
 
-const DashboardScreen = () => {
+
+const DashboardScreen = ({ navigation }) => {
+  // HIDE the action bar / header for this screen
+  useLayoutEffect(() => {
+    if (navigation?.setOptions) {
+      navigation.setOptions({ headerShown: false });
+    }
+  }, [navigation]);
+
   // compute greeting based on local time, and split into two lines:
   // "Good" on first line and "<Period>," on second (e.g. "Afternoon,")
   const { firstLine, secondLine } = useMemo(() => {
@@ -68,8 +77,8 @@ const DashboardScreen = () => {
         />
 
       </View>
-      
       {/* The rest of your dashboard content would go here */}
+      <FloatingAddButton />
 
     </SafeAreaView>
   );
@@ -93,7 +102,7 @@ const styles = StyleSheet.create({
   greetingText: {
     fontSize: 18,                          // base size you gave
     lineHeight: 21,                        // tall leading so "Good" and "Afternoon," sit nicely
-    color: '#6AAB73',                      // green tint (your value)
+    color: '#4ade80',                      // green tint (your value)
     fontWeight: '200',                     // light/regular stroke
     fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif', // serif feel on both platforms
 
@@ -160,3 +169,4 @@ const styles = StyleSheet.create({
 });
 
 export default DashboardScreen;
+ 
