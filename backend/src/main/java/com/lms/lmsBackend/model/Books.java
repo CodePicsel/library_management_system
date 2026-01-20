@@ -21,7 +21,7 @@ public class Books {
     // We store the IMAGE URL, not the actual image
     private String imageUrl;
 
-    private boolean isAvailable = true;
+    private boolean isAvailable;
 
     public boolean isAvailable() {
         return isAvailable;
