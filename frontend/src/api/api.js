@@ -1,18 +1,19 @@
-// /api/api.js
+// src/api/api.js
 import axios from 'axios';
 import { Buffer } from 'buffer';
+import { API_BASE_URL } from '../config/api';
 
 const api = axios.create({
-  baseURL: 'http://10.0.2.2:8080',
-  timeout: 60000,
+  baseURL: API_BASE_URL,
+  timeout: 60000, // ms
   headers: { 'Content-Type': 'application/json' },
 });
 
 export function setBasicAuth(username, password) {
-  if(username && password){
+  if (username && password) {
     const token = Buffer.from(`${username}:${password}`).toString('base64');
     api.defaults.headers.common.Authorization = `Basic ${token}`;
-  }else{
+  } else {
     delete api.defaults.headers.common.Authorization;
   }
 }

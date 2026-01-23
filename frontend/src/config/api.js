@@ -1,4 +1,15 @@
 // src/config/api.js
+import { Platform } from 'react-native';
+
+// Local emulator host for Android AVD; use localhost on iOS simulator if needed
+const LOCAL_ANDROID_HOST = 'http://10.0.2.2:8080';
+const LOCAL_IOS_HOST = 'http://localhost:8080';
+
+// Production backend (Railway)
+const PROD_HOST = 'https://lively-nourishment-production-bfe8.up.railway.app';
+
 export const API_BASE_URL = __DEV__
-  ? 'http://10.0.2.2:8080'
-  : 'https://your-production-domain.com';
+  ? (Platform.OS === 'android' ? LOCAL_ANDROID_HOST : LOCAL_IOS_HOST)
+  : PROD_HOST;
+  
+// export const API_BASE_URL = PROD_HOST;
