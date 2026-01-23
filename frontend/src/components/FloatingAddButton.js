@@ -140,7 +140,10 @@ export default function FloatingAddButton({ navigation: navProp }) {
             style={[styles.actionBtn, styles.actionShadow]}
           >
             <View style={[styles.dot, { backgroundColor: '#3b82f6' }]} />
-            <Text style={styles.actionText}>Students</Text>
+            {/* <Text style={styles.actionText}>Manage/n Students</Text> */}
+            <Text style={styles.actionText}>
+              Manage{'\n'}Students
+            </Text>
           </TouchableOpacity>
         </Animated.View>
 
@@ -200,7 +203,7 @@ const styles = StyleSheet.create({
   icon: { width: 26, height: 26, justifyContent: 'center', alignItems: 'center' },
   bar: { width: 22, height: 2.4, backgroundColor: '#fff', borderRadius: 1.5, position: 'absolute' },
   actionWrapper: {
-    position: 'absolute', bottom: 0, alignItems: 'center', justifyContent: 'center', width: MAIN_SIZE, zIndex: 1000,
+    position: 'absolute', bottom: 15, alignItems: 'center', justifyContent: 'center', width: MAIN_SIZE, zIndex: 1000,
   },
   actionBtn: {
     width: ACTION_SIZE * 3.0, height: ACTION_SIZE, borderRadius: ACTION_SIZE / 2,
