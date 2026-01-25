@@ -72,7 +72,7 @@ public class BooksService {
     }
     //Listing All Books On Device Which are Available
     public List<Books> getAllBooks() {
-        return bookRepo.findByIsAvailableTrue();
+        return bookRepo.findAll();
     }
 
     @Transactional

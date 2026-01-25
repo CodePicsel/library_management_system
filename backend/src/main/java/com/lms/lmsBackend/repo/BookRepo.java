@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface BookRepo extends JpaRepository<Books,Long> {
     List<Books> findByIsAvailableFalseAndReturnByBefore(LocalDateTime now);
-    List<Books> findByIsAvailableTrue();
+    List<Books> findAll();
 }
