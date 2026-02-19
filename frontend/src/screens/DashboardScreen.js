@@ -49,7 +49,7 @@ const DashboardScreen = ({ navigation }) => {
     try {
       const res = await api.get('/books/books-all');
       setBooks(Array.isArray(res.data) ? res.data : []);
-      console.log(filtered)
+      // console.log(filtered)
       setFiltered(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error('fetchBooks error', err?.response ?? err.message ?? err);

@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Getter
 @Setter
@@ -20,7 +22,7 @@ public class Books {
 
     // We store the IMAGE URL, not the actual image
     private String imageUrl;
-
+    @JsonProperty("isAvailable")
     private boolean isAvailable;
 
     public boolean isAvailable() {
@@ -29,6 +31,9 @@ public class Books {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+    public void getAvailable() {
+        return ; 
     }
 
     // Link to the student who currently has it

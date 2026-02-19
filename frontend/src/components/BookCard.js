@@ -14,7 +14,7 @@ export default function BookCard({ book, onPress }) {
         <Text style={styles.meta}>{category}</Text>
       </View>
       <View style={styles.right}>
-        <Text style={[styles.avail, available ? styles.available : styles.available]}>
+        <Text style={[styles.avail, available ? styles.available : styles.unavailable]}>
           {available ? 'Available' : 'Unavailable'}
         </Text>
         <Text style={styles.id}>#{book_id ?? '-'}</Text>

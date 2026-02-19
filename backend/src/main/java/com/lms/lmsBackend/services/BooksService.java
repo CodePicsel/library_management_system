@@ -24,6 +24,7 @@ public class BooksService {
 
     // Only Admin can add
     public Books addBook(Books books) throws IOException {
+        //books.setAvailable();
         return bookRepo.save(books);
     }
 

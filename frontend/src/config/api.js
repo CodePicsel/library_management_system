@@ -8,8 +8,6 @@ const LOCAL_IOS_HOST = 'http://localhost:8080';
 // Production backend (Railway)
 const PROD_HOST = 'https://lively-nourishment-production-bfe8.up.railway.app';
 
-export const API_BASE_URL = __DEV__
-  ? (Platform.OS === 'android' ? LOCAL_ANDROID_HOST : LOCAL_IOS_HOST)
-  : PROD_HOST;
+export const API_BASE_URL = LOCAL_ANDROID_HOST;
   
 // export const API_BASE_URL = PROD_HOST;
